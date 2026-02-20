@@ -2,7 +2,6 @@
 const intro = document.getElementById("intro");
 const mainContent = document.getElementById("mainContent");
 const enterBtn = document.getElementById("enterBtn");
-const musicToggle = document.getElementById("musicToggle");
 const lanternsIntro = document.getElementById("lanternsIntro");
 const petalsGlobal = document.getElementById("petalsGlobal");
 const particles = document.getElementById("particles");
@@ -14,8 +13,6 @@ const thanksModal = document.getElementById("thanksModal");
 const closeModal = document.getElementById("closeModal");
 const toTop = document.getElementById("toTop");
 
-let audioCtx;
-let gainNode;
 let toastTimer;
 
 function on(el, eventName, handler) {
@@ -80,48 +77,6 @@ function createLanterns(container, count) {
         lantern.style.opacity = `${0.72 + Math.random() * 0.26}`;
         lantern.style.transform = `scale(${0.8 + Math.random() * 0.7})`;
         container.appendChild(lantern);
-    }
-}
-
-function initAudio() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioCtx.createGain();
-    gainNode.gain.value = 0;
-    gainNode.connect(audioCtx.destination);
-
-    const notes = [196.0, 246.94, 293.66];
-    notes.forEach((freq, index) => {
-        const osc = audioCtx.createOscillator();
-        const oscGain = audioCtx.createGain();
-        osc.type = "sine";
-        osc.frequency.value = freq;
-        osc.detune.value = index * 3;
-        oscGain.gain.value = 0.05;
-        osc.connect(oscGain);
-        oscGain.connect(gainNode);
-        osc.start();
-    });
-}
-
-function toggleMusic() {
-    if (!audioCtx) {
-        initAudio();
-    }
-
-    const isOn = musicToggle.getAttribute("aria-pressed") === "true";
-    if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-    }
-
-    musicToggle.setAttribute("aria-pressed", String(!isOn));
-    musicToggle.textContent = !isOn ? "Music: On" : "Music: Off";
-
-    if (!isOn) {
-        gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0.42, audioCtx.currentTime + 1.3);
-    } else {
-        gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.9);
     }
 }
 
@@ -246,8 +201,9 @@ function initGsap() {
         ease: "none",
     });
 
-    gsap.to(".cover-art", {
-        backgroundPosition: "50% 56%",
+    gsap.to(".cover-image", {
+        scale: 1.015,
+        yPercent: -1.4,
         duration: 14,
         repeat: -1,
         yoyo: true,
@@ -301,7 +257,6 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", updatePetalFallDistance);
 
 on(enterBtn, "click", enterInvitation);
-on(musicToggle, "click", toggleMusic);
 
 on(copyHash, "click", async () => {
     const copied = await copyTextSafe(hashText.textContent.trim());
