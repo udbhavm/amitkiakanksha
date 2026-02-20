@@ -18,6 +18,11 @@ let audioCtx;
 let gainNode;
 let toastTimer;
 
+function on(el, eventName, handler) {
+    if (!el) return;
+    el.addEventListener(eventName, handler);
+}
+
 async function copyTextSafe(text) {
     if (!text) return false;
     try {
@@ -295,15 +300,15 @@ window.addEventListener("load", () => {
 
 window.addEventListener("resize", updatePetalFallDistance);
 
-enterBtn.addEventListener("click", enterInvitation);
-musicToggle.addEventListener("click", toggleMusic);
+on(enterBtn, "click", enterInvitation);
+on(musicToggle, "click", toggleMusic);
 
-copyHash.addEventListener("click", async () => {
+on(copyHash, "click", async () => {
     const copied = await copyTextSafe(hashText.textContent.trim());
     showToast(copied ? "Copied" : "Copy failed");
 });
 
-rsvpForm.addEventListener("submit", async (event) => {
+on(rsvpForm, "submit", async (event) => {
     event.preventDefault();
 
     if (!rsvpForm.checkValidity()) {
@@ -328,8 +333,12 @@ rsvpForm.addEventListener("submit", async (event) => {
             throw new Error("Netlify form submission failed");
         }
 
-        thanksModal.classList.add("show");
-        thanksModal.setAttribute("aria-hidden", "false");
+        if (thanksModal) {
+            thanksModal.classList.add("show");
+            thanksModal.setAttribute("aria-hidden", "false");
+        } else {
+            showToast("RSVP sent");
+        }
         rsvpForm.reset();
     } catch (error) {
         showToast("RSVP failed");
@@ -338,18 +347,20 @@ rsvpForm.addEventListener("submit", async (event) => {
     }
 });
 
-closeModal.addEventListener("click", () => {
+on(closeModal, "click", () => {
+    if (!thanksModal) return;
     thanksModal.classList.remove("show");
     thanksModal.setAttribute("aria-hidden", "true");
 });
 
-thanksModal.addEventListener("click", (event) => {
+on(thanksModal, "click", (event) => {
+    if (!thanksModal) return;
     if (event.target === thanksModal) {
         thanksModal.classList.remove("show");
         thanksModal.setAttribute("aria-hidden", "true");
     }
 });
 
-toTop.addEventListener("click", () => {
+on(toTop, "click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
