@@ -33,7 +33,7 @@
     </div>
     <div class="entry-rings"></div>
     <div class="lantern-layer" id="lanternsIntro"></div>
-    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">Music: Off</button>
+    <!-- <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">Music: Off</button> -->
 
     <div class="intro-content">
       <p class="kicker intro-kicker">Wedding Invitation</p>
@@ -132,7 +132,8 @@
           </div>
           <div class="travel-info">
             <h5>Travel Information</h5>
-            <p><strong>Nearest Airport:</strong><br />Chaudhary Charan Singh International Airport (Approx. 25-30 mins)</p>
+            <p><strong>Nearest Airport:</strong><br />Chaudhary Charan Singh International Airport (Approx. 25-30 mins)
+            </p>
             <p><strong>Nearest Railway Station:</strong><br />Lucknow Charbagh Railway Station (Approx. 35 mins)</p>
           </div>
         </article>
@@ -151,10 +152,14 @@
     <section class="rsvp section" id="rsvp">
       <div class="container reveal">
         <h3 class="section-title">RSVP</h3>
-        <form id="rsvpForm" novalidate>
-          <label>Name<input type="text" id="name" required /></label>
+        <form id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="wedding-rsvp" />
+          <p style="display: none;">
+            <label>Do not fill this if you are human: <input name="bot-field" type="text" /></label>
+          </p>
+          <label>Name<input type="text" id="name" name="name" required /></label>
           <label>Will you attend?
-            <select id="attend" required>
+            <select id="attend" name="attend" required>
               <option value="">Select</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>

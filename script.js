@@ -303,17 +303,39 @@ copyHash.addEventListener("click", async () => {
     showToast(copied ? "Copied" : "Copy failed");
 });
 
-rsvpForm.addEventListener("submit", (event) => {
+rsvpForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!rsvpForm.checkValidity()) {
         rsvpForm.reportValidity();
         return;
     }
+    const submitBtn = rsvpForm.querySelector('button[type="submit"]');
+    const formData = new FormData(rsvpForm);
+    const encodedData = new URLSearchParams(formData).toString();
 
-    thanksModal.classList.add("show");
-    thanksModal.setAttribute("aria-hidden", "false");
-    rsvpForm.reset();
+    try {
+        if (submitBtn) submitBtn.disabled = true;
+        const response = await fetch("/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: encodedData,
+        });
+
+        if (!response.ok) {
+            throw new Error("Netlify form submission failed");
+        }
+
+        thanksModal.classList.add("show");
+        thanksModal.setAttribute("aria-hidden", "false");
+        rsvpForm.reset();
+    } catch (error) {
+        showToast("RSVP failed");
+    } finally {
+        if (submitBtn) submitBtn.disabled = false;
+    }
 });
 
 closeModal.addEventListener("click", () => {
