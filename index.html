@@ -152,8 +152,8 @@
     <section class="rsvp section" id="rsvp">
       <div class="container reveal">
         <h3 class="section-title">RSVP</h3>
-        <form id="rsvpForm" name="wedding-rsvp" method="POST" action="/" target="netlify-rsvp-frame" data-netlify="true" netlify netlify-honeypot="bot-field"
-          novalidate>
+        <form id="rsvpForm" name="wedding-rsvp" method="POST" action="/" target="netlify-rsvp-frame" data-netlify="true"
+          netlify netlify-honeypot="bot-field" novalidate>
           <input type="hidden" name="form-name" value="wedding-rsvp" />
           <p style="display: none;">
             <label>Do not fill this if you are human: <input name="bot-field" type="text" /></label>
@@ -170,7 +170,8 @@
         </form>
       </div>
     </section>
-    <iframe name="netlify-rsvp-frame" title="Netlify RSVP Submit Frame" style="display: none;" aria-hidden="true"></iframe>
+    <iframe name="netlify-rsvp-frame" title="Netlify RSVP Submit Frame" style="display: none;"
+      aria-hidden="true"></iframe>
 
     <footer class="footer">
       <div class="gold-divider"></div>
@@ -178,6 +179,14 @@
       <button class="to-top" id="toTop" type="button" aria-label="Scroll to top">Top</button>
     </footer>
   </main>
+  <div class="modal" id="thanksModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Close">x</button>
+      <h4>Thank You</h4>
+      <p>Your presence will make our celebration brighter.</p>
+    </div>
+  </div>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
