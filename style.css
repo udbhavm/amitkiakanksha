@@ -491,13 +491,14 @@ body::before {
 
 .hero {
     text-align: center;
-    padding-top: clamp(5rem, 9vw, 8rem);
+    padding-top: clamp(0.45rem, 1.2vw, 0.9rem);
 }
 
 .ganesha-invocation {
     text-align: center;
     overflow: hidden;
     padding-top: calc(clamp(3.8rem, 8vw, 7rem) + 1.4rem);
+    padding-bottom: clamp(2rem, 4vw, 3.2rem);
 }
 
 .ganesha-rings {
@@ -558,7 +559,7 @@ body::before {
 }
 
 .ganesha-divider.bottom {
-    margin-top: 1.2rem;
+    margin-top: 1.8rem;
 }
 
 .ganesha-divider::after {
@@ -573,30 +574,8 @@ body::before {
 }
 
 .ganesha-flourish {
-    width: min(180px, 40vw);
-    height: 12px;
-    margin: 1rem auto 0;
-    position: relative;
-    border-radius: 999px;
-    background: radial-gradient(circle at center, rgba(243, 210, 122, 0.88) 0 2px, transparent 2px);
-}
-
-.ganesha-flourish::before,
-.ganesha-flourish::after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    width: 40%;
-    height: 1px;
-    background: rgba(243, 210, 122, 0.65);
-}
-
-.ganesha-flourish::before {
-    left: 0;
-}
-
-.ganesha-flourish::after {
-    right: 0;
+    margin-top: 1.9rem;
+    margin-bottom: 0.2rem;
 }
 
 .kicker,
@@ -814,6 +793,47 @@ body::before {
     margin: 0.8rem auto 1.2rem;
     max-width: 44ch;
     font-size: 1.12rem;
+}
+
+.travel-info,
+.weather-box {
+    text-align: left;
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(243, 210, 122, 0.5);
+    border-radius: 14px;
+    background: linear-gradient(
+        145deg,
+        rgba(10, 22, 39, 0.72),
+        rgba(22, 37, 56, 0.64)
+    );
+}
+
+.travel-info h5,
+.weather-box h5 {
+    margin: 0 0 0.45rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    color: var(--gold-2);
+    text-transform: uppercase;
+}
+
+.travel-info p,
+.weather-box p {
+    margin: 0.45rem 0 0;
+    max-width: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(248, 244, 236, 0.95);
+}
+
+.weather-box span {
+    display: inline-block;
+    width: 1.2rem;
+    text-align: center;
+    margin-right: 0.2rem;
+    color: var(--gold-2);
 }
 
 .maps-btn,
