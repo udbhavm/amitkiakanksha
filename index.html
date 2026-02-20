@@ -33,7 +33,7 @@
     </div>
     <div class="entry-rings"></div>
     <div class="lantern-layer" id="lanternsIntro"></div>
-    <!-- <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">Music: Off</button> -->
+    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false">Music: Off</button>
 
     <div class="intro-content">
       <p class="kicker intro-kicker">Wedding Invitation</p>
@@ -152,7 +152,8 @@
     <section class="rsvp section" id="rsvp">
       <div class="container reveal">
         <h3 class="section-title">RSVP</h3>
-        <form id="rsvpForm" name="wedding-rsvp" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field" novalidate>
+        <form id="rsvpForm" name="wedding-rsvp" method="POST" action="/" target="netlify-rsvp-frame" data-netlify="true" netlify netlify-honeypot="bot-field"
+          novalidate>
           <input type="hidden" name="form-name" value="wedding-rsvp" />
           <p style="display: none;">
             <label>Do not fill this if you are human: <input name="bot-field" type="text" /></label>
@@ -169,6 +170,7 @@
         </form>
       </div>
     </section>
+    <iframe name="netlify-rsvp-frame" title="Netlify RSVP Submit Frame" style="display: none;" aria-hidden="true"></iframe>
 
     <footer class="footer">
       <div class="gold-divider"></div>

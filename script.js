@@ -341,7 +341,13 @@ on(rsvpForm, "submit", async (event) => {
         }
         rsvpForm.reset();
     } catch (error) {
-        showToast("RSVP failed");
+        try {
+            HTMLFormElement.prototype.submit.call(rsvpForm);
+            showToast("RSVP sent");
+            rsvpForm.reset();
+        } catch (submitError) {
+            showToast("RSVP failed");
+        }
     } finally {
         if (submitBtn) submitBtn.disabled = false;
     }
