@@ -2,6 +2,8 @@
 const intro = document.getElementById("intro");
 const mainContent = document.getElementById("mainContent");
 const enterBtn = document.getElementById("enterBtn");
+const bgMantra = document.getElementById("bgMantra");
+const musicToggle = document.getElementById("musicToggle");
 const lanternsIntro = document.getElementById("lanternsIntro");
 const petalsGlobal = document.getElementById("petalsGlobal");
 const particles = document.getElementById("particles");
@@ -14,6 +16,74 @@ const closeModal = document.getElementById("closeModal");
 const toTop = document.getElementById("toTop");
 
 let toastTimer;
+let hasStartedMusic = false;
+const MUSIC_PREF_KEY = "musicMuted";
+
+function setMusicUnavailable() {
+    if (!musicToggle) return;
+    musicToggle.disabled = true;
+    musicToggle.textContent = "Music unavailable";
+    musicToggle.classList.add("is-muted");
+    musicToggle.setAttribute("aria-pressed", "true");
+    musicToggle.setAttribute("aria-label", "Background music unavailable");
+}
+
+function setMuted(isMuted, persist = true) {
+    if (bgMantra) {
+        bgMantra.muted = isMuted;
+    }
+
+    if (musicToggle) {
+        musicToggle.textContent = isMuted ? "Music: Off" : "Music: On";
+        musicToggle.classList.toggle("is-muted", isMuted);
+        musicToggle.setAttribute("aria-pressed", String(isMuted));
+        musicToggle.setAttribute(
+            "aria-label",
+            isMuted ? "Unmute background music" : "Mute background music",
+        );
+    }
+
+    if (persist) {
+        try {
+            localStorage.setItem(MUSIC_PREF_KEY, String(isMuted));
+        } catch (error) {
+            // Ignore storage failures.
+        }
+    }
+}
+
+function initMusicPreference() {
+    let isMuted = false;
+    try {
+        isMuted = localStorage.getItem(MUSIC_PREF_KEY) === "true";
+    } catch (error) {
+        isMuted = false;
+    }
+    setMuted(isMuted, false);
+}
+
+function startMusicOnce() {
+    if (!bgMantra || !musicToggle || musicToggle.disabled) return;
+    if (bgMantra.error) {
+        setMusicUnavailable();
+        return;
+    }
+
+    bgMantra.volume = 0.42;
+    const playPromise = bgMantra.play();
+
+    if (playPromise && typeof playPromise.then === "function") {
+        playPromise
+            .then(() => {
+                hasStartedMusic = true;
+            })
+            .catch(() => {
+                hasStartedMusic = false;
+            });
+    } else {
+        hasStartedMusic = true;
+    }
+}
 
 function on(el, eventName, handler) {
     if (!el) return;
@@ -244,6 +314,14 @@ function initGsap() {
 }
 
 window.addEventListener("load", () => {
+    initMusicPreference();
+
+    if (bgMantra) {
+        bgMantra.addEventListener("error", setMusicUnavailable);
+    } else {
+        setMusicUnavailable();
+    }
+
     setTimeout(() => preloader.classList.add("hidden"), 900);
     createLanterns(lanternsIntro, 11);
     createFallingElements(petalsGlobal, "petal", 50);
@@ -257,6 +335,16 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", updatePetalFallDistance);
 
 on(enterBtn, "click", enterInvitation);
+on(enterBtn, "click", startMusicOnce);
+
+on(musicToggle, "click", () => {
+    if (!bgMantra || musicToggle.disabled) return;
+    const nextMuted = !bgMantra.muted;
+    setMuted(nextMuted, true);
+    if (!nextMuted && (!hasStartedMusic || bgMantra.paused)) {
+        startMusicOnce();
+    }
+});
 
 on(copyHash, "click", async () => {
     const copied = await copyTextSafe(hashText.textContent.trim());

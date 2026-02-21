@@ -334,6 +334,51 @@ body::before {
     overflow: hidden;
 }
 
+.music-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 80;
+    border: 1px solid rgba(243, 210, 122, 0.75);
+    border-radius: 999px;
+    padding: 0.58rem 0.95rem;
+    font-family: "Cinzel", serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    color: rgba(248, 244, 236, 0.96);
+    background: linear-gradient(
+        145deg,
+        rgba(20, 35, 56, 0.84),
+        rgba(30, 48, 74, 0.8)
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow:
+        0 8px 20px rgba(8, 16, 30, 0.38),
+        0 0 14px rgba(243, 210, 122, 0.2);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+    transform: translateY(-1px);
+    box-shadow:
+        0 10px 24px rgba(8, 16, 30, 0.45),
+        0 0 18px rgba(243, 210, 122, 0.28);
+}
+
+.music-toggle.is-muted {
+    opacity: 0.74;
+}
+
+.music-toggle:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
+}
+
 .enter-btn::after,
 .submit-btn::after,
 .maps-btn::after,
@@ -1262,5 +1307,12 @@ body::before {
 
     .cover-image {
         object-position: center;
+    }
+
+    .music-toggle {
+        top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+        right: 0.75rem;
+        padding: 0.5rem 0.78rem;
+        font-size: 0.68rem;
     }
 }
