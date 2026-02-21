@@ -250,6 +250,7 @@ body::before {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    filter: brightness(1.16) contrast(1.03) saturate(1.08);
 }
 
 .cover-overlay {
@@ -258,10 +259,10 @@ body::before {
     background:
         radial-gradient(
             circle at center,
-            rgba(245, 217, 137, 0.08),
-            rgba(0, 0, 0, 0.38) 62%
+            rgba(245, 217, 137, 0.05),
+            rgba(0, 0, 0, 0.1) 62%
         ),
-        linear-gradient(to top, rgba(6, 9, 14, 0.58), rgba(6, 9, 14, 0.14));
+        linear-gradient(to top, rgba(6, 9, 14, 0.2), rgba(6, 9, 14, 0.03));
 }
 
 .aura {
@@ -292,21 +293,25 @@ body::before {
 
 .scroll-cue-text {
     font-family: "Cinzel", serif;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(243, 210, 122, 0.94);
-    text-shadow: 0 0 12px rgba(243, 210, 122, 0.35);
+    color: #ffd24a;
+    text-shadow:
+        0 0 14px rgba(255, 210, 74, 0.65),
+        0 1px 2px rgba(8, 16, 28, 0.95),
+        0 0 1px rgba(8, 16, 28, 0.9);
     animation: scrollCuePulse 1.6s ease-in-out infinite;
 }
 
 .scroll-cue-chevron {
-    width: 14px;
-    height: 14px;
-    border-right: 2px solid rgba(243, 210, 122, 0.95);
-    border-bottom: 2px solid rgba(243, 210, 122, 0.95);
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid #ffd24a;
+    border-bottom: 2px solid #ffd24a;
     transform: rotate(45deg);
-    filter: drop-shadow(0 0 8px rgba(243, 210, 122, 0.35));
+    filter: drop-shadow(0 0 10px rgba(255, 210, 74, 0.8))
+        drop-shadow(0 1px 1px rgba(8, 16, 28, 0.9));
     animation: scrollCueBounce 1.6s ease-in-out infinite;
 }
 
