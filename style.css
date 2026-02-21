@@ -971,6 +971,7 @@ body.intro-open .music-toggle {
 
 .venue,
 .hashtag,
+.memories,
 .rsvp {
     text-align: center;
 }
@@ -1069,6 +1070,102 @@ body.intro-open .music-toggle {
     background-clip: text;
     color: transparent;
     text-shadow: 0 0 24px rgba(243, 210, 122, 0.25);
+}
+
+.memories .container {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+.memories .container::after {
+    content: "";
+    width: min(240px, 58vw);
+    height: 2px;
+    margin-top: 1rem;
+    background: linear-gradient(90deg, transparent, var(--gold-2), transparent);
+}
+
+.memory-divider {
+    width: min(240px, 58vw);
+    margin: 0.35rem auto 0.85rem;
+}
+
+.memory-copy {
+    margin: 0 auto 0.35rem;
+    max-width: 50ch;
+    font-size: clamp(1.06rem, 2.3vw, 1.2rem);
+    line-height: 1.65;
+    color: rgba(248, 244, 236, 0.94);
+}
+
+.memory-upload-btn {
+    display: inline-block;
+    margin-top: 0.45rem;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(243, 210, 122, 0.78);
+    border-radius: 999px;
+    font-family: "Cinzel", serif;
+    font-size: clamp(0.92rem, 2.2vw, 1.06rem);
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #1a1f2d;
+    background: linear-gradient(
+        130deg,
+        rgba(198, 166, 75, 0.88),
+        rgba(243, 210, 122, 0.98)
+    );
+    box-shadow:
+        0 8px 24px rgba(243, 210, 122, 0.23),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.memory-upload-btn::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -40%;
+    width: 40%;
+    height: 300%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.65),
+        transparent
+    );
+    transform: rotate(12deg);
+    animation: shimmer 2.8s linear infinite;
+}
+
+.memory-upload-btn:hover,
+.memory-upload-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px rgba(243, 210, 122, 0.3),
+        0 0 20px rgba(243, 210, 122, 0.24),
+        inset 0 0 10px rgba(255, 255, 255, 0.26);
+    filter: saturate(1.05);
+}
+
+.memory-note {
+    margin: 0.55rem auto 0;
+    max-width: 50ch;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: rgba(248, 244, 236, 0.82);
+}
+
+.memory-note-small {
+    margin-top: 0.2rem;
+    font-size: 0.86rem;
+    color: rgba(248, 244, 236, 0.68);
 }
 
 .toast {
