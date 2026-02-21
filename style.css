@@ -733,6 +733,11 @@ body::before {
     text-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
 }
 
+.couple-weds {
+    display: block;
+    margin: 0.08em 0 0.06em;
+}
+
 .date {
     margin: 0;
     font-size: clamp(1.3rem, 2.5vw, 2rem);
