@@ -362,6 +362,12 @@ body::before {
         opacity 0.2s ease;
 }
 
+body.intro-open .music-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+}
+
 .music-toggle:hover,
 .music-toggle:focus-visible {
     transform: translateY(-1px);
