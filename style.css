@@ -895,10 +895,43 @@ body.intro-open .music-toggle {
     font-size: clamp(1.3rem, 2.5vw, 1.7rem);
 }
 
+.event-meta {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.event-meta span:first-child {
+    letter-spacing: 0.02em;
+}
+
+.event-meta span:last-child {
+    font-size: 0.86em;
+    color: rgba(248, 244, 236, 0.94);
+}
+
 .event-card p {
     margin: 0;
     font-size: clamp(1.05rem, 2.4vw, 1.2rem);
     line-height: 1.6;
+}
+
+.event-divider {
+    width: min(210px, 72%);
+    height: 1px;
+    margin: 0.9rem 0 0.65rem;
+    background: linear-gradient(90deg, transparent, rgba(243, 210, 122, 0.9), transparent);
+}
+
+.style-guide-line {
+    margin-top: 0.15rem;
+    font-size: clamp(0.95rem, 2.1vw, 1.06rem);
+    color: rgba(248, 244, 236, 0.95);
+}
+
+.style-guide-line strong {
+    font-family: "Cinzel", serif;
+    letter-spacing: 0.04em;
+    color: var(--gold-2);
 }
 
 .venue,
