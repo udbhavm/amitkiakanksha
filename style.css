@@ -278,6 +278,38 @@ body::before {
     animation: pulse 4s ease-in-out infinite;
 }
 
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(2.2rem, 5.2vh, 3.6rem);
+    transform: translateX(-50%);
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    pointer-events: none;
+}
+
+.scroll-cue-text {
+    font-family: "Cinzel", serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(243, 210, 122, 0.94);
+    text-shadow: 0 0 12px rgba(243, 210, 122, 0.35);
+    animation: scrollCuePulse 1.6s ease-in-out infinite;
+}
+
+.scroll-cue-chevron {
+    width: 14px;
+    height: 14px;
+    border-right: 2px solid rgba(243, 210, 122, 0.95);
+    border-bottom: 2px solid rgba(243, 210, 122, 0.95);
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 8px rgba(243, 210, 122, 0.35));
+    animation: scrollCueBounce 1.6s ease-in-out infinite;
+}
+
 .enter-btn,
 .submit-btn,
 .maps-btn,
@@ -325,6 +357,10 @@ body::before {
 .enter-btn {
     margin-top: 1.2rem;
     padding: 0.9rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
     font-size: clamp(0.86rem, 2.1vw, 1.04rem);
     font-family: "Cinzel", serif;
     letter-spacing: 0.08em;
@@ -338,6 +374,41 @@ body::before {
     box-shadow:
         0 10px 24px rgba(38, 22, 6, 0.28),
         inset 0 0 10px rgba(255, 255, 255, 0.16);
+    animation: enterBtnPulse 1.8s ease-in-out infinite;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.enter-btn-label {
+    position: relative;
+    z-index: 1;
+}
+
+.enter-btn-icon {
+    position: relative;
+    z-index: 1;
+    width: 0.58rem;
+    height: 0.58rem;
+    border-right: 2px solid rgba(246, 237, 215, 0.95);
+    border-bottom: 2px solid rgba(246, 237, 215, 0.95);
+    transform: rotate(-45deg);
+    animation: enterBtnHint 1.2s ease-in-out infinite;
+}
+
+.enter-btn:hover,
+.enter-btn:focus-visible {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 14px 30px rgba(38, 22, 6, 0.34),
+        0 0 22px rgba(243, 210, 122, 0.34),
+        inset 0 0 10px rgba(255, 255, 255, 0.22);
+    filter: saturate(1.05);
+}
+
+.enter-btn:active {
+    transform: translateY(0) scale(0.99);
 }
 
 .petal-layer,
@@ -1113,6 +1184,55 @@ body::before {
     }
     50% {
         transform: translate3d(8px, -14px, 0) rotate(1deg);
+    }
+}
+
+@keyframes scrollCueBounce {
+    0%,
+    100% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.45;
+    }
+    50% {
+        transform: translateY(8px) rotate(45deg);
+        opacity: 1;
+    }
+}
+
+@keyframes scrollCuePulse {
+    0%,
+    100% {
+        opacity: 0.65;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes enterBtnPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 10px 24px rgba(38, 22, 6, 0.28),
+            inset 0 0 10px rgba(255, 255, 255, 0.16);
+    }
+    50% {
+        box-shadow:
+            0 13px 28px rgba(38, 22, 6, 0.32),
+            0 0 18px rgba(243, 210, 122, 0.26),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes enterBtnHint {
+    0%,
+    100% {
+        transform: translateX(0) rotate(-45deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateX(4px) rotate(-45deg);
+        opacity: 1;
     }
 }
 
