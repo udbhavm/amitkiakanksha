@@ -14,6 +14,8 @@ const rsvpForm = document.getElementById("rsvpForm");
 const thanksModal = document.getElementById("thanksModal");
 const closeModal = document.getElementById("closeModal");
 const toTop = document.getElementById("toTop");
+const modalTitle = document.getElementById("modalTitle");
+const modalMessage = document.getElementById("modalMessage");
 
 let toastTimer;
 let hasStartedMusic = false;
@@ -83,6 +85,19 @@ function startMusicOnce() {
     } else {
         hasStartedMusic = true;
     }
+}
+
+function setRsvpModalContent(attendValue) {
+    if (!modalTitle || !modalMessage) return;
+
+    if (attendValue === "yes") {
+        modalTitle.textContent = "YAY!!";
+        modalMessage.textContent = "We're officially excited now.";
+        return;
+    }
+
+    modalTitle.textContent = "But...";
+    modalMessage.textContent = "there will be dessert! 🥺";
 }
 
 function on(el, eventName, handler) {
@@ -360,6 +375,8 @@ on(rsvpForm, "submit", async (event) => {
     }
     const submitBtn = rsvpForm.querySelector('button[type="submit"]');
     const formData = new FormData(rsvpForm);
+    const attendValue = String(formData.get("attend") || "");
+    setRsvpModalContent(attendValue);
     const encodedData = new URLSearchParams(formData).toString();
 
     try {
